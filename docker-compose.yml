@@ -1,0 +1,34 @@
+version: "3.5"
+services:
+  db:
+    container_name: db
+    image: postgres:14
+    volumes:
+      - db-data:/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "5432:5432"
+    networks:
+      - app-connect
+
+  app_node:
+    build: .
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    depends_on:
+      - db  
+    volumes:
+      - .:/home/node/app
+    networks:
+      - app-connect
+
+volumes:
+  db-data:
+
+networks:
+  app-connect:
+    driver: bridge

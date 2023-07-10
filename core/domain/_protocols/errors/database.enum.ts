@@ -1,0 +1,6 @@
+export enum DatabaseEnum {
+  UNKNOWN = 0,
+  UNIQUE_VIOLATION = 1,
+  RELATION_VIOLATION = 2,
+  MISSING_PARAMS_VIOLATION = 3,
+}
